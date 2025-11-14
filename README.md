@@ -288,7 +288,7 @@ DATA_DIR=/data
 
 ## License
 
-This software and associated documentation files are proprietary - see [LICENSE](./LICENSE) file for details
+This software and associated documentation files are proprietary - see [LICENSE](./vlei-classifier/LICENSE) file for details
 
 ---
 
