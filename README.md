@@ -305,7 +305,7 @@ This software and associated documentation files are proprietary - see [LICENSE]
 ## Demo & Contact
 
 - **Live Demo:** [[Deployment URL](https://d2lt-leicca.mintblue.net/)] (admin/vLEI-Admin-2025!)
-- **Email:** [pieter@mintblue.com]
+- **Email:** [akber@d2legaltech.com], [pieter@mintblue.com], [siddharth.yagnamurthy@d2legaltech.com], [sydney.hassal@d2legaltech.com]
 
 ---
 
