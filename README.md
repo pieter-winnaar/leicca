@@ -279,8 +279,10 @@ DATA_DIR=/data
 
 ## Team
 
+- **Akber Datoo** - Team Lead - [[LinkedIn](https://www.linkedin.com/in/akber-datoo-1105911/)]
 - **Pieter Den Dooven** - Development - [[LinkedIn](https://www.linkedin.com/in/pieter-den-dooven-679a9a43)]
 - **Siddharth Yagnamurthy** - Compliance Data Architect - [[LinkedIn](https://www.linkedin.com/in/siddharthyagnamurthy/)]
+- **Sydney Hassal** - Netting Expert - [[LinkedIn](https://www.linkedin.com/in/sydney-h-45295127/)]
 
 ---
 
@@ -293,8 +295,9 @@ This software and associated documentation files are proprietary - see [LICENSE]
 ## Acknowledgments
 
 - **GLEIF** - vLEI infrastructure and hackathon organization
+- **D2 Legal Technology** - Idea and Decision tree data and Basel CCR research
 - **mintBlue** - Blockchain services and encryption patterns
-- **D2 Legal Technology** - Decision tree data and Basel CCR research
+- **BSV Association** - xxx
 - **WebOfTrust** - KERI/ACDC specifications and Signify-TS library
 
 ---
