@@ -1,10 +1,10 @@
-# LEICCA - Legal Entity Identity Compliance & Classification Accelerator
+# LEICCA - LEI Counterparty Classification Assistant
 
 ## 🏆 GLEIF vLEI Hackathon 2025 | Theme 2: Industry 4.0
 
 > **Automating Basel III Counterparty Credit Risk Compliance with vLEI + Blockchain Audit Trails**
 
-### 🎯 Problem Statement
+### Problem Statement
 
 - Automate Know-Your-Business (KYB) workflows using vLEI credentials
 - Integrate vLEI into banking/compliance systems (Basel CCR classification)
@@ -13,7 +13,7 @@
 
 ---
 
-## 📊 Impact Metrics
+## Impact Metrics
 
 | Metric                   | Manual Process      | LEICCA                   | Improvement              |
 | ------------------------ | ------------------- | ------------------------ | ------------------------ |
@@ -28,13 +28,13 @@
 
 ---
 
-## 🚀 Key Innovations
+## Key Innovations
 
-### 1. Temporal Proof System ⭐ NOVEL CONTRIBUTION
+### 1. Temporal Proof System
 
-First implementation to anchor KERI Key Event Log (KEL) states to blockchain for historical credential verification.
+Anchors KERI Key Event Log (KEL) states to blockchain for historical credential verification.
 
-**Problem Solved:** Regulators require proof that credentials were valid _at the time of decision-making_, not just now.
+**Problem:** Regulators require proof that credentials were valid _at the time of decision-making_, not just now.
 
 **Our Solution:**
 
@@ -43,13 +43,11 @@ First implementation to anchor KERI Key Event Log (KEL) states to blockchain for
 - Create cryptographic proof linking credential validity to specific block height
 - Enable auditors: "Was this credential valid on November 13, 2025?"
 
-**Competitive Advantage:** No other vLEI implementation provides temporal verification - this solves actual Basel CCR compliance requirements.
-
 ---
 
-### 2. Complete vLEI Issuance Platform 🎓 ECOSYSTEM MASTERY
+### 2. Complete vLEI Issuance Platform
 
-Unlike verification-only solutions, LEICCA includes a **full credential issuance and management platform**:
+Full credential issuance and management platform:
 
 **Capabilities:**
 
@@ -69,13 +67,11 @@ Unlike verification-only solutions, LEICCA includes a **full credential issuance
 - Built-in verifier integration with Root of Trust bypass
 - Infrastructure health dashboard with live Docker stats
 
-**Why This Matters:** Demonstrates complete vLEI ecosystem understanding - from issuance through verification to blockchain audit trails.
-
 ---
 
-### 3. Dual-Key Encryption 🔐 PRIVACY + TRANSPARENCY
+### 3. Dual-Key Encryption
 
-**Challenge:** Compliance requires transparency (audit trails) AND privacy (sensitive financial data).
+**Challenge:** Compliance requires both transparency (audit trails) and privacy (sensitive financial data).
 
 **Our Approach:**
 
@@ -83,8 +79,6 @@ Unlike verification-only solutions, LEICCA includes a **full credential issuance
 - `audit_key` key: Audit trail system access (transparency)
 - Multiparty encryption with EC P-256
 - On-chain encrypted hash capsule with blockchain immutability
-
-**Result:** Regulatory transparency without compromising business confidentiality.
 
 ---
 
@@ -137,7 +131,7 @@ Unlike verification-only solutions, LEICCA includes a **full credential issuance
 
 ---
 
-## 🛠️ Technical Architecture
+## Technical Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -171,7 +165,7 @@ Unlike verification-only solutions, LEICCA includes a **full credential issuance
 
 ---
 
-## 📦 Technology Stack
+## Technology Stack
 
 | Layer              | Technology                                                      |
 | ------------------ | --------------------------------------------------------------- |
@@ -186,7 +180,7 @@ Unlike verification-only solutions, LEICCA includes a **full credential issuance
 
 ---
 
-## 🔧 Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 
@@ -215,7 +209,7 @@ DATA_DIR=/data
 
 ---
 
-## 🎯 Hackathon Alignment
+## Hackathon Alignment
 
 ### Theme 2: Industry 4.0 - Identity and KYB Credentials for Commerce
 
@@ -229,52 +223,43 @@ DATA_DIR=/data
 
 ### Criteria Addressed
 
-✅ **Technical Innovation:** Temporal proof system (KEL state anchoring) - novel contribution
+✅ **Technical Innovation:** Temporal proof system (KEL state anchoring to blockchain)
 ✅ **Real-World Problem:** Basel III CCR compliance ($4.7T market)
 ✅ **vLEI Technology Use:** Complete ecosystem (issuance + verification + audit)
-✅ **Scalability:** Service architecture, Docker deployment, quasi-production-ready
+✅ **Scalability:** Service architecture, Docker deployment, production-ready infrastructure
 ✅ **User Experience:** 5-8 minute workflow vs 2-4 hours manual
 ✅ **Practical Utility:** Deployed admin platform, working end-to-end demo
 
 ---
 
-## 🏅 Competitive Advantages
+## Key Differentiators
 
-### What Sets LEICCA Apart
+1. **Temporal Proof System**
+   - Anchors KEL states to blockchain for historical verification
+   - Solves regulatory requirement: proof of validity at decision time
+   - Combines vLEI credential verification with blockchain timestamping
 
-1. **Only Solution with Temporal Proof System**
+2. **End-to-End Platform**
+   - Credential issuance (QVI, LE, ECR) via Signify-TS
+   - Credential verification via Python vLEI verifier
+   - Blockchain audit trails with BSV integration
+   - Infrastructure monitoring (KERIA, witnesses, verifier)
 
-   - No other vLEI hackathon project anchors KEL states to blockchain
-   - Solves actual regulatory requirement (proof of validity at decision time)
-   - Creates defensible moat (requires deep vLEI + blockchain knowledge)
-
-2. **Complete Credential Issuance Platform**
-
-   - Most teams only verify credentials; we issue them too
-   - Demonstrates ecosystem mastery (Signify-TS, IPEX, witness coordination)
-   - Enables end-to-end demo without GLEIF dependency
-
-3. **Ready Implementation**
-
-   - 5,000+ lines of TypeScript (services + UI)
-   - Comprehensive error handling and graceful degradation
-   - Infrastructure monitoring and Docker performance metrics
-   - Complete test credential library (10+ scenarios)
+3. **Production-Ready Implementation**
+   - 5,000+ lines of TypeScript
+   - Service-oriented architecture with dependency injection
+   - Docker Compose deployment with Traefik routing
+   - Test credential library for demo scenarios
 
 4. **Real Regulatory Use Case**
-
-   - Basel III CCR affects every global bank
-   - Clear ROI calculation (95% time reduction, 99.7% cost reduction)
-   - Addresses $4.7 trillion market opportunity
-
-5. **Dual-Key Encryption**
-   - Privacy (user self-decryption) + transparency (audit access)
-   - No other solution balances these requirements
-   - Production-grade cryptographic patterns
+   - Basel III CCR compliance for global banks
+   - 16 jurisdiction decision trees from D2 Legal Technology
+   - ROI: 95% time reduction, 99.7% cost reduction
+   - $4.7 trillion market opportunity
 
 ---
 
-## 📈 Market Opportunity
+## Market Opportunity
 
 ### Target Market
 
@@ -283,35 +268,29 @@ DATA_DIR=/data
 - **Investment Funds:** Due diligence workflows
 - **Regulators:** Audit trail verification
 
-### Business Model
+### Potential Business Model
 
-- **SaaS Subscription:** $5,000-50,000/month per institution
-- **Per-Transaction Pricing:** $1-5 per verification + classification
-- **Blockchain Fees:** Pass-through (1 sat/kilobyte ≈ $0.00001 per audit capsule)
-- **Integration Services:** One-time setup ($50,000-200,000)
-
-### Revenue Potential
-
-- **Year 1:** 10 pilot banks × $10K/month = $1.2M ARR
-- **Year 3:** 100 banks × $25K/month = $30M ARR
-- **Year 5:** 500 institutions × $35K/month = $210M ARR
+- SaaS subscription per institution
+- Per-transaction pricing for verification + classification
+- Blockchain transaction fees (pass-through model)
+- Integration and setup services
 
 ---
 
-## 👥 Team
+## Team
 
 - **Pieter Den Dooven** - Development - [[LinkedIn](https://www.linkedin.com/in/pieter-den-dooven-679a9a43)]
 - **Siddharth Yagnamurthy** - Compliance Data Architect - [[LinkedIn](https://www.linkedin.com/in/siddharthyagnamurthy/)]
 
 ---
 
-## 📝 License
+## License
 
 This software and associated documentation files are proprietary - see [LICENSE](./LICENSE) file for details
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **GLEIF** - vLEI infrastructure and hackathon organization
 - **mintBlue** - Blockchain services and encryption patterns
@@ -320,7 +299,7 @@ This software and associated documentation files are proprietary - see [LICENSE]
 
 ---
 
-## 📞 Demo & Contact
+## Demo & Contact
 
 - **Live Demo:** [[Deployment URL](https://d2lt-leicca.mintblue.net/)] (admin/vLEI-Admin-2025!)
 - **Email:** [pieter@mintblue.com]
