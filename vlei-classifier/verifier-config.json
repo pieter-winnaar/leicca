@@ -1,0 +1,19 @@
+{
+  "dt": "2025-11-11T22:00:00.000000+00:00",
+  "iurls": [
+    "http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+    "http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+    "http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+  ],
+  "durls": [
+    "http://vlei-server:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao",
+    "http://vlei-server:7723/oobi/ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY",
+    "http://vlei-server:7723/oobi/EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw"
+  ],
+  "trustedLeis": [],
+  "allowedSchemas": [
+    "QVI_SCHEMA2",
+    "LE_SCHEMA2",
+    "ECR_SCHEMA_PROD"
+  ]
+}

@@ -1,0 +1,102 @@
+# ============================================================================
+# Docker Ignore File for LEICCA vLEI Classifier
+# ============================================================================
+# Excludes files/directories from Docker build context to reduce image size
+# and speed up builds
+# ============================================================================
+
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js build output
+.next
+out
+build
+dist
+
+# Testing
+coverage
+.nyc_output
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
+test
+tests
+
+# Environment files (secrets should never be in image)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE / Editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation
+*.md
+!README.md
+docs
+.claude
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+.tmp
+.temp
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Turbo
+.turbo
+
+# Deployment scripts (not needed in image)
+deploy.sh
+docker-compose.yml
+Dockerfile
+.dockerignore
+derive-address.ts
+
+# Audit files
+.audit-events.json
+
+# Credential storage (if exists)
+.credential-store
+
+# Test credentials (included in source, but listed here for reference)
+# test-credentials
+
+# Archive files
+*.tar.gz
+*.zip
+*.tar

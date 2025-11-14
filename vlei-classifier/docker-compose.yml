@@ -1,0 +1,275 @@
+version: '3.8'
+
+# ============================================================================
+# LEICCA vLEI Classifier - Full Infrastructure Stack
+# ============================================================================
+#
+# This docker-compose file deploys:
+# 1. leicca - Next.js web application
+# 2. keria - KERI Agent in the Cloud (AID management, credential issuance)
+# 3. python-verifier - vLEI credential verification service
+# 4. vlei-server - vLEI schema server (OOBI resolution)
+# 5. witness-demo - KERI witness network (key event log attestations)
+#
+# Networks:
+# - traefik-public-bridge: External network for Traefik reverse proxy routing
+# - gleif-internal: Internal network for GLEIF services communication
+# ============================================================================
+
+networks:
+  traefik-public-bridge:
+    external: true
+  gleif-internal:
+    driver: bridge
+
+volumes:
+  keria-data:
+    driver: local
+  leicca-data:
+    driver: local
+  witness-data:
+    driver: local
+
+services:
+  # ============================================================================
+  # LEICCA Web Application (Next.js 15)
+  # ============================================================================
+  leicca:
+    build:
+      context: . # Build from /root/apps/leicca (where files are extracted)
+      dockerfile: Dockerfile
+    container_name: leicca
+    restart: unless-stopped
+    networks:
+      - traefik-public-bridge
+      - gleif-internal
+    volumes:
+      - leicca-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      # Node.js
+      - NODE_ENV=production
+      - PORT=4003
+      - HOSTNAME=0.0.0.0
+
+      # Persistent storage (Docker volume)
+      - DATA_DIR=/app/data
+
+      # MintBlue SDK (CRITICAL - blockchain anchoring)
+      - MINTBLUE_SDK_TOKEN=${MINTBLUE_SDK_TOKEN}
+      - BLOCKCHAIN_BASKET=leicca-vlei-audit
+      - BLOCKCHAIN_NETWORK=main
+
+      # GLEIF Infrastructure (internal Docker network)
+      - KERIA_URL=http://keria:3901
+      - KERIA_AGENT_URL=http://keria:3902
+      - KERIA_BOOT_URL=http://keria:3903
+      - KERIA_PASSCODE=${KERIA_PASSCODE:-vlei-demo-12345678901}
+      - VLEI_VERIFIER_URL=http://python-verifier:7676
+      - VLEI_SERVER_URL=http://vlei-server:7723
+      - WITNESS_URL=http://witness-demo:5642
+      - WITNESS_URL_FOR_KERIA=http://witness-demo:5642
+      - VLEI_SERVER_URL_FOR_KERIA=http://vlei-server:7723
+      - VERIFIER_URL=http://python-verifier:7676
+
+      # GLEIF API (external)
+      - GLEIF_API_BASE=https://api.gleif.org/api/v1
+    depends_on:
+      - keria
+      - python-verifier
+      - vlei-server
+      - witness-demo
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--no-verbose',
+          '--tries=1',
+          '--spider',
+          'http://localhost:4003',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================================================
+  # KERIA - KERI Agent in the Cloud
+  # ============================================================================
+  # Purpose: Cloud-based KERI agent for AID management, credential issuance
+  # Ports:
+  #   3901 - Admin Interface (REST API)
+  #   3902 - KERI Protocol Interface (CESR over HTTP, OOBI endpoint)
+  #   3903 - Boot Interface (Agent Worker initialization)
+  # ============================================================================
+  keria:
+    image: gleif/keria:latest
+    container_name: keria
+    restart: unless-stopped
+    networks:
+      - gleif-internal
+    ports:
+      # External access for debugging (optional - can be removed in production)
+      - '13901:3901'
+      - '13902:3902'
+      - '13903:3903'
+    environment:
+      - KERI_AGENT_CORS=true
+      - PYTHONUNBUFFERED=1
+      - PYTHONIOENCODING=UTF-8
+      - KERIA_IURLS=http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=wan&tag=witness&tag=sample;http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=wil&tag=witness&tag=sample;http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=wes&tag=witness&tag=sample
+    volumes:
+      - keria-data:/usr/local/var/keri
+      - ./keria-config.json:/keria/config/keri/cf/keria.json
+    entrypoint:
+      [
+        'keria',
+        'start',
+        '--config-dir',
+        '/keria/config',
+        '--config-file',
+        'keria',
+        '--loglevel',
+        'INFO',
+      ]
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--no-verbose',
+          '--tries=1',
+          '--spider',
+          'http://localhost:3901',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - witness-demo
+
+  # ============================================================================
+  # Python vLEI Verifier
+  # ============================================================================
+  # Purpose: Production-grade cryptographic verification of vLEI credentials
+  # Port: 7676 - Main verifier API endpoint
+  #
+  # CUSTOM ROOT CONFIGURATION:
+  # - VERIFIER_ENV=development enables POST /root_of_trust/{aid} endpoint
+  # - VERIFY_ROOT_OF_TRUST=false allows custom roots (disables GLEIF validation)
+  # - Config mounted to standard location as verifier-config.json
+  # - NO persistent volume = roots reset on restart (easy development iteration)
+  # ============================================================================
+  python-verifier:
+    build:
+      context: .
+      dockerfile: Dockerfile.custom-verifier
+    container_name: python-verifier
+    restart: unless-stopped
+    working_dir: /usr/local/var/vlei-verifier
+    networks:
+      - gleif-internal
+    ports:
+      # External access for debugging (optional)
+      - '17676:7676'
+    environment:
+      # Test mode: Disables signed header verification
+      - VERIFIER_MODE=test
+      # Development mode: Enables POST /root_of_trust/{aid} endpoint
+      - VERIFIER_ENV=development
+      # Disable default GLEIF root validation (allows custom roots)
+      - VERIFY_ROOT_OF_TRUST=False
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python3',
+          '-c',
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:7676')",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    depends_on:
+      - vlei-server
+      - witness-demo
+      - keria
+
+  # ============================================================================
+  # vLEI Server (Schema Server)
+  # ============================================================================
+  # Purpose: Hosts ACDC credential schemas, provides OOBI resolution
+  # Port: 7723 - Schema OOBI endpoint
+  # ============================================================================
+  vlei-server:
+    image: gleif/vlei:1.0.0
+    container_name: vlei-server
+    restart: unless-stopped
+    networks:
+      - gleif-internal
+    ports:
+      # External access for debugging (optional)
+      - '17723:7723'
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--no-verbose',
+          '--tries=1',
+          '--spider',
+          'http://localhost:7723',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ============================================================================
+  # Witness Network
+  # ============================================================================
+  # Purpose: KERI witness network for key event log attestations
+  # Ports:
+  #   5642 - Witness 1
+  #   5643 - Witness 2 (multi-port witness demo container)
+  #   5644 - Witness 3
+  # ============================================================================
+  witness-demo:
+    image: gleif/keri:1.2.9
+    container_name: witness-demo
+    restart: unless-stopped
+    networks:
+      - gleif-internal
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONIOENCODING=UTF-8
+      - PYTHONWARNINGS=ignore::SyntaxWarning
+    command: witness demo --loglevel INFO
+    volumes:
+      - witness-data:/usr/local/var/keri
+      - ./witness-config:/keripy/scripts/keri/cf/main
+    ports:
+      # External access for debugging (optional)
+      - '15642:5642'
+      - '15643:5643'
+      - '15644:5644'
+      - '15645:5645'
+      - '15646:5646'
+      - '15647:5647'
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python3',
+          '-c',
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5642/oobi')",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      - vlei-server

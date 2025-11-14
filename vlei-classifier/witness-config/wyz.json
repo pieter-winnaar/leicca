@@ -1,0 +1,14 @@
+{
+    "wyz": {
+        "dt": "2024-12-31T14:06:30.123456+00:00",
+        "curls": ["tcp://witness-demo:5637/", "http://witness-demo:5647/"]
+    },
+    "dt": "2024-12-31T14:06:30.123456+00:00",
+    "iurls": [
+        "http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=wan&tag=witness",
+        "http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=wil&tag=witness",
+        "http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=wes&tag=witness",
+        "http://witness-demo:5645/oobi/BM35JN8XeJSEfpxopjn5jr7tAHCE5749f0OobhMLCorE/controller?name=wit&tag=witness",
+        "http://witness-demo:5646/oobi/BIj15u5V11bkbtAxMA7gcNJZcax-7TgaBMLsQnMHpYHP/controller?name=wub&tag=witness"
+    ]
+}

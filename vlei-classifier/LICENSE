@@ -1,0 +1,58 @@
+# Copyright and License Notice
+
+## Copyright
+
+Copyright © 2025 Pieter Den Dooven. All Rights Reserved.
+
+This software and associated documentation files (the "Software") are proprietary and confidential.
+
+## NO PERMISSION GRANTED
+
+**IMPORTANT:** The copyright holder does NOT grant permission to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this Software, or to permit persons to whom the Software is furnished to do so.
+
+This Software is provided for DEMONSTRATION and HACKATHON purposes only.
+
+## Third-Party Intellectual Property
+
+### Decision Tree Data
+
+The decision tree layouts and classification workflows contained in this project are the intellectual property of D2 Legal Technology and are used with permission for demonstration purposes only. These materials include but are not limited to:
+
+- DynamoDB decision tree layouts
+- Basel CCR classification workflows
+- Jurisdiction-specific regulatory decision trees
+- Question texts and decision logic
+
+**These materials are NOT licensed for redistribution or commercial use.**
+
+### mintBlue Blockchain Infrastructure
+
+The blockchain infrastructure packages (`@design-system-demo/blockchain-infrastructure`, `@design-system-demo/design-system`) are proprietary to mintBlue and are subject to separate license terms.
+
+### GLEIF vLEI Verifier
+
+If using the Python vLEI verifier (https://github.com/GLEIF-IT/vlei-verifier), it is subject to its own license terms. See the verifier repository for details.
+
+### BSV SDK
+
+The BSV SDK (`@bsv/sdk`) is subject to its own open source license. See the package documentation for details.
+
+## Hackathon Submission Context
+
+This project was created for the GLEIF vLEI Hackathon 2025 (November 5-6, 2025) as a proof-of-concept demonstration of:
+
+- vLEI credential cryptographic verification
+- Basel CCR classification workflow integration
+- Blockchain-anchored audit trail generation
+
+## Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Contact
+
+For licensing inquiries or permissions, please contact the copyright holder through the mintBlue organization.
+
+---
+
+**Last Updated:** November 14, 2025

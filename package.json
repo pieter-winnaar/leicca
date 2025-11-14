@@ -1,0 +1,31 @@
+{
+  "name": "leicca-vlei-hackathon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LEICCA - Legal Entity Identity Compliance & Classification Accelerator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pieter-winnaar/leicca"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @design-system-demo/vlei-classifier dev",
+    "build": "pnpm --filter @design-system-demo/vlei-classifier build",
+    "start": "pnpm --filter @design-system-demo/vlei-classifier start",
+    "test": "pnpm --filter @design-system-demo/vlei-classifier test",
+    "typecheck": "pnpm --filter @design-system-demo/vlei-classifier typecheck",
+    "lint": "pnpm --filter @design-system-demo/vlei-classifier lint"
+  },
+  "keywords": [
+    "vlei",
+    "gleif",
+    "hackathon",
+    "basel",
+    "ccr",
+    "compliance",
+    "blockchain",
+    "keri",
+    "acdc"
+  ],
+  "author": "Pieter Den Dooven",
+  "license": "Proprietary"
+}

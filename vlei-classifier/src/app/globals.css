@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Global styles for LEICCA vLEI Classifier
+ *
+ * Theme CSS variables are injected dynamically at runtime by ThemeProvider
+ * from ThemeService (packages/design-system/src/services/ThemeService.ts).
+ *
+ * This enables multi-brand theme switching without hardcoded CSS imports.
+ */
+
+/**
+ * Smooth Transitions and Animations
+ */
+
+@layer base {
+  /* Theme transition - prevent flash during theme switch */
+  :root {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Smooth scrolling for anchor links */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer components {
+  /* Card hover effect - subtle lift */
+  .card-hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px oklch(from var(--shadow) l c h / 0.15);
+  }
+
+  /* Focus visible styles for accessibility */
+  .focus-visible-ring:focus-visible {
+    outline: 2px solid oklch(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skeleton loading animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      oklch(var(--muted)) 0%,
+      oklch(var(--muted-foreground) / 0.1) 50%,
+      oklch(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  /* Fade in animation for content */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Staggered delays for cards */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  /* Dialog and Sheet animations */
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Dropdown menu animations */
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .menu-enter {
+    animation: scaleIn 0.15s ease-out;
+  }
+
+  /* Accordion animations */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
+  }
+
+  .accordion-content[data-state="open"] {
+    animation: accordion-down 0.2s ease-out;
+  }
+
+  .accordion-content[data-state="closed"] {
+    animation: accordion-up 0.2s ease-out;
+  }
+}
+
+@layer utilities {
+  /* Responsive text utilities */
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  }
+
+  .text-responsive-base {
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+  }
+
+  .text-responsive-xl {
+    font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2.25rem);
+  }
+
+  .text-responsive-2xl {
+    font-size: clamp(2rem, 1.7rem + 1.2vw, 3rem);
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Skip to main content link for accessibility */
+  .skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    z-index: 100;
+    padding: 8px 16px;
+    background: oklch(var(--primary));
+    color: oklch(var(--primary-foreground));
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  .skip-to-main:focus {
+    top: 8px;
+    left: 8px;
+  }
+}

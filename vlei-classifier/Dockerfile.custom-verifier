@@ -1,0 +1,14 @@
+FROM gleif/vlei-verifier:latest
+
+# Copy custom config to BOTH public and test locations
+COPY ./verifier-config.json /usr/local/var/vlei-verifier/scripts/keri/cf/verifier-config-public.json
+COPY ./verifier-config.json /usr/local/var/vlei-verifier/scripts/keri/cf/verifier-config-test.json
+
+# Ensure correct permissions
+RUN chmod 644 /usr/local/var/vlei-verifier/scripts/keri/cf/verifier-config-public.json && \
+    chmod 644 /usr/local/var/vlei-verifier/scripts/keri/cf/verifier-config-test.json
+
+# Verify the file was copied correctly
+RUN ls -la /usr/local/var/vlei-verifier/scripts/keri/cf/ && \
+    echo "Config file contents:" && \
+    cat /usr/local/var/vlei-verifier/scripts/keri/cf/verifier-config-public.json
