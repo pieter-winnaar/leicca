@@ -297,7 +297,7 @@ This software and associated documentation files are proprietary - see [LICENSE]
 - **GLEIF** - vLEI infrastructure and hackathon organization
 - **D2 Legal Technology** - Idea and Decision tree data and Basel CCR research
 - **mintBlue** - Blockchain services and encryption patterns
-- **BSV Association** - xxx
+- **BSV Association** - Blockchain Infrastructure
 - **WebOfTrust** - KERI/ACDC specifications and Signify-TS library
 
 ---
