@@ -25,6 +25,26 @@ This reduces misclassification risk, improves auditability, and shortens onboard
 
 ---
 
+### Business Problem
+
+Banks rely on correct counterparty classification to determine whether close-out netting and collateral enforceability apply under the Basel Accords. Errors in identifying:
+	•	Jurisdiction
+	•	Entity type
+	•	Regulatory regime
+	•	Formation characteristics
+	•	Insolvency regimes
+
+…can result in:
+	•	Incorrect netting treatment
+	•	Under-collateralised exposures
+	•	Misstated regulatory capital
+	•	Weak audit trails
+	•	Significant financial and supervisory risk
+
+Today, this analysis is often manual, slow, dispersed across teams, and dependent on scarce legal SMEs.
+
+---
+
 🌐 Live Demo
 
 App: https://d2lt-leicca.mintblue.net
@@ -40,7 +60,55 @@ https://drive.google.com/drive/folders/1ZHGhbcV5u-Qs684RU6W3ImSr2ltkDgbr?usp=sha
 
 ---
 
-## Impact Metrics
+Why vLEI Matters
+
+A traditional LEI provides static reference data.
+A vLEI provides cryptographically verifiable identity with:
+	•	Verified issuer chain
+	•	Integrity and signature checks
+	•	Revocation status
+	•	Role attribution
+	•	Proof the credential was valid at the time of decision-making
+
+Starting LEICCA with a vLEI means classification never begins on incomplete or unverified data.
+
+⸻
+
+### Solution Summary (Verify → Classify → Anchor)
+
+1. Verify: Establish Trusted Identity Before Classification
+	•	Upload a vLEI credential (.json or .cesr)
+	•	Cryptographically verify SAID, signatures, QVI trust chain, and revocation
+	•	Resolve jurisdiction automatically via GLEIF API
+	•	Prevent workflow execution on tampered or invalid credentials
+
+2. Classify: Guided, Legally Grounded Entity Determination
+	•	Wizard breaks complex legal opinions into simple binary questions
+	•	Contextual guidance directs users to authoritative sources
+	•	Evidence upload required when the legal opinion demands it
+	•	Final result is a structured, defensible classification
+
+3. Anchor: Immutable Audit Capsule on Blockchain
+	•	Combine vLEI verification, classification path, answers, timestamps, and evidence
+	•	Encrypt and anchor capsule to BSV blockchain
+	•	Produce a tamper-evident, publicly verifiable audit record
+	•	Full audit timeline available in the UI
+
+---
+
+### Impact Summary
+
+LEICCA enables:
+	•	Faster onboarding and counterparty reviews
+	•	Reduced reliance on legal SMEs
+	•	Higher classification accuracy
+	•	Stronger netting/collateral determinations
+	•	Complete, immutable audit evidence for supervisory reviews
+	•	Reusable proof packages shared across teams or institutions
+
+---
+
+### Impact Metrics
 
 | Metric                   | Manual Process      | LEICCA                   | Improvement              |
 | ------------------------ | ------------------- | ------------------------ | ------------------------ |
