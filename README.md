@@ -12,6 +12,33 @@
 - Demonstrate role-based credential management
 
 ---
+### Overview
+
+LEICCA is a vLEI-enabled decision-support application that helps financial institutions classify counterparties under the Basel Counterparty Credit Risk (CCR) framework. It combines:
+	•	Cryptographically verified identity (vLEI, KERI/ACDC)
+	•	A guided, legally-grounded classification wizard
+	•	Structured evidence capture
+	•	Tamper-evident blockchain anchoring
+	•	A complete audit timeline from verification to anchoring
+
+This reduces misclassification risk, improves auditability, and shortens onboarding and review cycles from hours to minutes.
+
+---
+
+🌐 Live Demo
+
+App: https://d2lt-leicca.mintblue.net
+Username: admin
+Password: vLEI-Admin-2025!
+
+---
+
+🎥 Demo Videos
+
+Download for best quality:
+https://drive.google.com/drive/folders/1ZHGhbcV5u-Qs684RU6W3ImSr2ltkDgbr?usp=share_link
+
+---
 
 ## Impact Metrics
 
